@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Menu Bank</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      @keyframes bounceIn {
+        0% {
+          transform: scale(0.8);
+          opacity: 0;
+        }
+        50% {
+          transform: scale(1.1);
+          opacity: 1;
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+
+      .bounce-in {
+        animation: bounceIn 1s ease-out forwards;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Main Content -->
+    <div class="w-screen h-auto">
+      <div class="w-full md:h-screen h-auto relative">
+        <img src="assets/img/buka_rekening/bank_view.png" alt="Menu Bank" class="w-full h-full" />
+
+        <a href="index.html" class="block">
+          <div class="bounce-in md:absolute md:top-2 md:left-7 mt-2 w-auto py-2 px-3 flex justify-center items-center">
+            <svg class="md:w-14 md:h-14 w-10 h-10 text-gray-700 hover:text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+              <path
+                fill-rule="evenodd"
+                d="M11.293 3.293a1 1 0 0 1 1.414 0l6 6 2 2a1 1 0 0 1-1.414 1.414L19 12.414V19a2 2 0 0 1-2 2h-3a1 1 0 0 1-1-1v-3h-2v3a1 1 0 0 1-1 1H7a2 2 0 0 1-2-2v-6.586l-.293.293a1 1 0 0 1-1.414-1.414l2-2 6-6Z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          </div>
+        </a>
+
+        <div class="bounce-in md:absolute md:top-16 md:right-48 mt-4 mb-16 w-56 mx-auto text-white">
+          <div class="md:w-72 w-56 bg-white rounded-lg drop-shadow-lg hover:scale-105 ease-in duration-150 overflow-hidden">
+            <a href="buka_rekening.html" class="block">
+              <div>
+                <img alt="buka rekening" src="assets/img/buka_rekening/intro.png" class="md:h-36 h-28 w-full" />
+              </div>
+
+              <div class="md:h-16 h-14 flex justify-center items-center bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800">
+                <h3 class="px-3.5 md:text-xl text-lg font-semibold text-center">Buka Rekening</h3>
+              </div>
+            </a>
+          </div>
+
+          <div class="md:w-72 w-56 mt-12 bg-white rounded-lg drop-shadow-lg hover:scale-105 ease-in duration-150 overflow-hidden relative">
+            <div class="absolute inset-0 bg-gray-600 bg-opacity-70 flex items-center justify-center">
+              <span class="text-white md:text-2xl text-xl font-bold">Coming Soon</span>
+            </div>
+
+            <a href="ambil_uang.html" class="block">
+              <div>
+                <img alt="ambil uang" src="assets/img/buka_rekening/ambil_atm.png" class="md:h-36 h-28 w-full" />
+              </div>
+
+              <div class="md:h-16 h-14 flex justify-center items-center bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800">
+                <h3 class="px-3.5 md:text-xl text-lg font-semibold text-center">Ambil Uang</h3>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End Main Content -->
+  </body>
+</html>

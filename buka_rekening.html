@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Buka Rekening</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      @keyframes fadeIn {
+        0% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+
+      .fade-in {
+        animation: fadeIn 1s ease-in-out forwards;
+      }
+
+      @font-face {
+        font-family: "sister";
+        src: url(assets/font/font-1.ttf) format(truetype);
+      }
+
+      .font-sister {
+        font-family: "sister", sans-serif;
+      }
+
+      .bg-white-op {
+        background-color: rgb(255, 255, 255, 0.8);
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      .box-shadow {
+        box-shadow: 2px 2px 20px black;
+      }
+
+      .move {
+        position: static; /* Default: tidak absolut */
+        color: white;
+        display: block;
+        width: auto;
+        background-color: rgb(80, 80, 255);
+        padding: 2px 5px;
+        margin-right: 5px;
+        font-size: 1rem;
+        border-radius: 5px;
+        text-decoration: none;
+        transition: transform 0.3s ease-in-out;
+      }
+
+      @media (min-width: 768px) {
+        .move {
+          position: absolute; /* Aktif hanya pada layar >=768px */
+          bottom: 12px;
+          right: 12px;
+          padding: 5px 20px;
+        }
+      }
+
+      .move:hover {
+        transform: scale(1.1); /* Membesarkan link saat hover */
+      }
+    </style>
+    <script>
+      // Daftar pesan
+      const messages = [
+        // intro
+        "Haloo, kawan! Perkenalkan namaku Sema.",
+        "Senang bertemu denganmu, kawan baruku.",
+        "Hai kawan, apakah kamu suka menabung?",
+        "Tau gak sih? Kalau kita sudah bisa membuka rekening untuk kita sendiri.",
+        "Apakah kamu tertarik? Kalau iya, temani aku untuk membuka rekening.",
+        "Sebelum itu, jangan lupa ambil nomor antrian dari arahan petugas ya teman-teman.",
+
+        // step 1
+        "Ayo sudah giliran kita untuk membuka rekening!",
+
+        // step 2
+        "Jangan lupa membawa dokumen yang diperlukan ya teman-teman!",
+        "Oo iya, aku lupa memberi tahu kalian. Dokumen apa saja yang perlu kita bawa.",
+        "Ada beberapa dokumen yang perlu kita bawa, yaitu KTP orang tua, NPWP orang tua, dan akta kelahiran kalian.",
+
+        // step 3
+        "Selanjutnya, minta bantuan orang tua kalian untuk mengisi dan menandatangani formulir pembukaan rekening.",
+
+        // step 4
+        "Oo iya, setiap bank memiliki setoran awal yang berbeda-beda.",
+
+        // step 5
+        "Selanjutnya, kita hanya perlu menunggu petugas bank untuk mengecek data kita.",
+
+        // Penjelasan Pekerjaan
+        "Oo iya, sambil menunggu kalian tau gak sih apa sebutan bagi petugas bank yang membantu kita untuk membuka rekening?",
+        "Kalau belum tahu, aku bakal jelasin ke kalian.",
+        "Petugas bank yang membantu kita sekarang ini biasanya disebut sebagai Customer Service.",
+        "Mereka bertugas untuk memberikan informasi dan membantu kita sebagai nasabah.",
+        "Selain Customer Service, masih banyak lagi pekerjaan-pekerjaan yang lainnya.",
+        "Seperti misalnya Teller, jika kamu mau tahu lebih lanjut terus temani aku ya.",
+        "Owh, sepertinya sudah hampir selesai.",
+
+        // step 6
+        "Selamat, kalian sekarang sudah dapat menabung di bank.",
+        "Tunggu, ini belum selesai. Jadi jangan pergi dulu.",
+        "Selanjutnya, aku bakal memberi tahu kalian bagaimana cara mengambil uang di ATM.",
+        "Jadi tetap tunggu keseruanku berikutnya yaa.",
+      ];
+
+      let currentIndex = 1;
+
+      // Fungsi untuk mengganti teks
+      function changeText() {
+        if (currentIndex >= messages.length) {
+          currentIndex = messages.length - 1;
+        }
+
+        document.getElementById("text-display").textContent = messages[currentIndex];
+
+        switch (currentIndex) {
+          case 6:
+            changeImage("assets/img/buka_rekening/step1.png");
+            break;
+          case 7:
+            changeImage("assets/img/buka_rekening/step2.png");
+            break;
+          case 10:
+            changeImage("assets/img/buka_rekening/step3.png");
+            break;
+          case 11:
+            changeImage("assets/img/buka_rekening/step4.png");
+            break;
+          case 12:
+            changeImage("assets/img/buka_rekening/step5.png");
+            break;
+          case 13:
+            changeImage("assets/img/buka_rekening/intro.png");
+            break;
+          case 20:
+            changeImage("assets/img/buka_rekening/step6.png");
+            break;
+          case 21:
+            changeImage("assets/img/buka_rekening/outro.png");
+            break;
+          case messages.length - 1:
+            removeButton();
+            break;
+        }
+
+        currentIndex++;
+      }
+
+      // Fungsi untuk back
+      function back() {
+        if (currentIndex <= 1) {
+          currentIndex = 0;
+        } else if (currentIndex == messages.length) {
+          currentIndex -= 2;
+
+          const buttonNext = document.getElementById("button");
+          const a = document.getElementById("menu");
+
+          // Cek jika elemen <a> ada, sembunyikan
+          if (a) {
+            a.classList.add("hidden");
+          }
+
+          // Cek jika buttonNext ada, hilangkan class hidden
+          if (buttonNext) {
+            buttonNext.classList.remove("hidden");
+            buttonNext.classList.add("block");
+          }
+        } else {
+          currentIndex -= 2;
+        }
+
+        if (currentIndex >= messages.length) {
+          currentIndex = messages.length - 1;
+        }
+
+        document.getElementById("text-display").textContent = messages[currentIndex];
+
+        switch (currentIndex) {
+          case 5:
+            changeImage("assets/img/buka_rekening/intro.png");
+            break;
+          case 6:
+            changeImage("assets/img/buka_rekening/step1.png");
+            break;
+          case 9:
+            changeImage("assets/img/buka_rekening/step2.png");
+            break;
+          case 10:
+            changeImage("assets/img/buka_rekening/step3.png");
+            break;
+          case 11:
+            changeImage("assets/img/buka_rekening/step4.png");
+            break;
+          case 12:
+            changeImage("assets/img/buka_rekening/step5.png");
+            break;
+          case 13:
+            changeImage("assets/img/buka_rekening/intro.png");
+            break;
+          case 19:
+            changeImage("assets/img/buka_rekening/intro.png");
+            break;
+          case 20:
+            changeImage("assets/img/buka_rekening/step6.png");
+            break;
+          case messages.length - 1:
+            removeButton();
+            break;
+        }
+
+        currentIndex++;
+      }
+
+      // Fungsi untuk mengganti gambar
+      function changeImage(picture) {
+        const img = document.getElementById("image");
+        img.src = picture;
+      }
+
+      // Fungsi untuk menghapus button di akhir menu\
+      function removeButton() {
+        const button = document.getElementById("button");
+        button.classList.add("hidden");
+
+        // Pastikan elemen <a> tidak dibuat lebih dari sekali
+        let link = document.getElementById("menu");
+        if (!link) {
+          link = document.createElement("a");
+          link.href = "bank.html";
+          link.textContent = "Menu";
+          link.id = "menu";
+          link.classList.add("move");
+
+          const text = document.getElementById("text");
+          text.appendChild(link);
+        } else {
+          link.classList.remove("hidden");
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div class="w-screen h-screen relative">
+      <a href="bank.html" class="block">
+        <div class="bounce-in absolute md:top-2 md:left-7 top-0 left-0 mt-2 w-auto py-2 px-3 flex justify-center items-center">
+          <svg class="md:w-14 md:h-14 w-10 h-10 text-gray-700 hover:text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+            <path
+              fill-rule="evenodd"
+              d="M11.293 3.293a1 1 0 0 1 1.414 0l6 6 2 2a1 1 0 0 1-1.414 1.414L19 12.414V19a2 2 0 0 1-2 2h-3a1 1 0 0 1-1-1v-3h-2v3a1 1 0 0 1-1 1H7a2 2 0 0 1-2-2v-6.586l-.293.293a1 1 0 0 1-1.414-1.414l2-2 6-6Z"
+              clip-rule="evenodd"
+            />
+          </svg>
+        </div>
+      </a>
+
+      <div class="fade-in md:animate-none w-full md:h-full h-auto absolute top-[20%] md:static relative">
+        <img id="image" src="assets/img/buka_rekening/intro.png" alt="buka rekening" class="w-full md:h-full h-auto" />
+
+        <!-- Kotak teks dengan tombol panah -->
+        <div
+          id="text"
+          class="fade-in md:absolute md:bottom-10 md:left-1/4 md:w-1/2 w-full md:h-32 h-40 md:mt-0 mt-2 md:pl-14 md:pr-12 py-1 bg-white box-shadow flex justify-center items-center gap-0 border border-solid border-white rounded-xl"
+        >
+          <!-- Tombol anak panah -->
+          <button id="button-back" onclick="back()" class="md:absolute md:bottom-1 md:left-1 hover:rounded-full hover:shadow-lg focus:outline-none">
+            <svg class="w-11 h-11 text-black" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12l4 4m-4-4 4-4" />
+            </svg>
+          </button>
+
+          <!-- Teks yang akan berubah -->
+          <p id="text-display" class="block w-full px-2 md:text-2xl text-lg text-black font-sister text-left">Haloo, kawan! Perkenalkan namaku Sema.</p>
+
+          <!-- Tombol anak panah -->
+          <button id="button" onclick="changeText()" class="md:absolute md:bottom-1 md:right-1 hover:rounded-full hover:shadow-lg focus:outline-none">
+            <svg class="w-11 h-11 text-black" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m14 0-4 4m4-4-4-4" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
